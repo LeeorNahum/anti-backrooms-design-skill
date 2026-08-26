@@ -1,9 +1,9 @@
 ---
 name: "anti-backrooms"
-description: "Review and improve visual, spatial, textual, and user-facing artifacts for coherent-but-wrong failures that violate human normalcy, including nonsensical wording, unsupported claims, wrong scale, impossible adjacency, unreadable hierarchy, duplicated patterns, meta leakage, and broken viewer flow. Always use this skill when creating or critiquing UI, decks, diagrams, docs, PDFs, signage, booths, copy, or other artifacts where local plausibility can hide global incoherence."
+description: "Use whenever anything is written, edited, named, or shown that a person or another agent will read or look at, including every visual, spatial, or printed artifact and equally the surfaces that do not look like design work: comments, commit messages, names, reusable instructions, and the prose beside configuration. Apply while composing, not only when a critique is asked for. It catches output that is locally plausible but globally wrong, the coherent-but-wrong failures that violate human normalcy: filler wording, claims stronger than their evidence, wrong scale, impossible adjacency, unreadable hierarchy, meaningless repetition, the same fact shown twice, leaked internal context or session evidence, a generic artifact shaped by one person, and a viewer with no path through it."
 metadata:
   author: "Leeor Nahum"
-  version: "1.6.2"
+  version: "1.7.0"
 ---
 
 # Anti-Backrooms
@@ -13,6 +13,8 @@ Use this skill to catch a class of failure that is hard to express with ordinary
 The Backrooms are the right metaphor. Everything looks almost normal, but the whole space is still wrong: too repetitive, too detached from purpose, too large or too small, poorly connected, or subtly impossible. AI-generated artifacts fail the same way. A UI, deck, diagram, document, PDF, landing page, or booth plan can be locally coherent while globally incoherent.
 
 Use this skill to avoid building artifacts that feel like a no-clipped average of nearby patterns instead of something intentionally designed for a real human, a real task, and a real space.
+
+An artifact is anything a person or another agent will read or look at later: a screen, a slide, a document, a comment in code, a commit message, a name, a label, a reply, a reusable instruction, a configuration and the sentence that explains it. The skill applies to the sentence being written now, not only to the deliverable reviewed at the end.
 
 The core test is simple: do not only ask whether each part is valid. Ask whether the whole artifact and its language make sense for a real human to understand, inhabit, read, scan, click, project, print, or physically approach.
 
@@ -59,6 +61,10 @@ Inspect every artifact through these lenses:
 - **Duplicate truth:** the same fact is rendered twice on one screen in two different words or components, beside itself in one header row or repeated from the header inside a nested panel, so the viewer scans past what looks like new information and finds the same fact again. Adjacent duplicates hide best: two differently styled chips inches apart read as two facts.
 - **Human-path failure:** a person moving through the artifact would not know where to look, what to do, or when the story ends.
 - **Proper-noun leakage:** real names, project names, repo names, source labels, or personal context appear where a generic artifact should use placeholders or audience-facing language.
+- **Audience of one:** a generic artifact or a product default takes its shape from the one person in the room, their vocabulary, habits, machine, or the single sample at hand, so something meant for everyone is quietly tuned to its author or its first user. Nothing is named, which is why it hides better than proper-noun leakage. The test is whether the result would be the same if a different person had asked.
+- **Purpose assumption:** copy, a setting, or an explanation describes what the reader will do with the output or where it will go, when the artifact cannot know. Say what the thing does and stop.
+- **Evidence residue:** a durable, reusable artifact carries the dates, measurements, timings, incident story, or session trace from the moment it was edited. The rule belongs in the artifact. The evidence belongs in the change record or the project that found it.
+- **Frame-escaped encoding:** text prepared for one rendering frame is shown in another with its escaping intact, entities, markup, or fences appearing as characters, so the reader sees the encoding instead of the content.
 - **Negative-anchor leakage:** the artifact warns against bad examples by naming them, accidentally making the bad pattern more likely to be copied.
 - **Reference infection:** appendix, source notes, examples, or implementation details leak into the main artifact instead of staying in their proper supporting place.
 - **Example anchoring:** an example offered only to illustrate a point gets lifted verbatim as the answer, fixing a name, value, or wording the reader should have chosen for their own case. Even a good example anchors.
@@ -108,6 +114,8 @@ When this skill is active:
 - Keep mainline narrative separate from appendix or reference material
 - Keep instructions for maintaining the artifact out of the copy the audience consumes
 - If something only works because the viewer already knows the backstory, it is not solved
+- If a generic artifact's shape was decided from one person's traits, one machine, or one sample, say so and decide again from the audience it claims
+- Treat a comment, a commit message, a name, a reply, and a reusable instruction as artifacts with an audience, and hold them to the same checks
 
 ## Correction Patterns
 
@@ -189,6 +197,9 @@ These are pattern categories, not labels to copy into final artifacts:
 - A surface meant to be universal names one product, place, file, or format it serves -> use general language, and move the specific case to the context that owns it.
 - A settings panel shows a raw API host or endpoint URL nobody will type or act on -> drop it, or fold it into the one control that uses it (an "open" link), not display it as a fact.
 - A status already shown in the page header is repeated inside a nested panel below it -> show it once, where it is first noticed, and let the nested panel show only what is new.
+- A product default or a generic rule is chosen from how its author speaks, works, or is set up -> decide from the audience the artifact claims, and keep the author's case as one data point.
+- A line of copy tells the reader what they will do with the result -> say what the control or the text does, and stop.
+- A reusable instruction records when, how, or by how much it was last found wrong -> keep the rule, move the evidence to the change record.
 
 ## Fast Review Prompt
 
@@ -202,6 +213,7 @@ When in doubt, ask:
 - Does every name read correctly from the viewer's frame, not just the author's?
 - Can the main message be paraphrased plainly without inventing missing logic?
 - Do the claims, examples, labels, and evidence agree with one another?
+- Would this be the same if a different person had asked for it, on a different machine, from a different sample?
 
 ## Response Format
 
@@ -219,6 +231,10 @@ For each finding, prefer this shape:
 - `Symptom`
 - `Why it fails`
 - `Fix`
+
+## Say What It Did
+
+Whenever this skill changes something, or finds something it could not fix, say so where the user can see it: a line that begins `Anti-backrooms review:` followed by one line per finding, what it was and what changed, or what still needs the user. Stay silent when composing and nothing was found. When a review was explicitly asked for and nothing was found, say that in the same form. The user can then see that the skill fired, judge each finding, and correct a false positive in one reply.
 
 ## Escalation Rule
 
